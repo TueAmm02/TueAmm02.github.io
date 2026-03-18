@@ -94,6 +94,12 @@ async function loadStaticSchools() {
   } catch { return []; }
 }
 
+// --- Firebase config ----------------------
+// Indsæt din Firebase Realtime Database URL herunder (uden trailing slash)
+// Eksempel: 'https://mit-projekt-default-rtdb.europe-west1.firebasedatabase.app'
+const FIREBASE_URL = 'https://skolemad-d7a29-default-rtdb.europe-west1.firebasedatabase.app/';
+
+
 // --- Comments storage ---------------------
 // Uses API if server available, else localStorage
 const STORE_KEY = 'skolemad_comments';
