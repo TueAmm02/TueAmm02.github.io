@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skolemadsforsøget – Interaktivt Danmarkskort</title>
+  <meta name="description" content="Offentlig oversigt over skoler og leverandører i det danske skolemadsforsøg" />
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <!-- MarkerCluster -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" crossorigin="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="skolemad-platform/public/css/style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <div class="header-flag">
+          <span class="flag-stripe red"></span>
+          <span class="flag-stripe white"></span>
+          <span class="flag-stripe red"></span>
+        </div>
+        <div class="header-title">
+          <h1>Skolemadsforsøget</h1>
+          <p>Offentlig oversigt over skolemadsleverandører i Danmark</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" id="searchInput" placeholder="Søg skole eller kommune…" autocomplete="off" />
+          <button class="search-clear" id="searchClear" aria-label="Ryd søgning">×</button>
+        </div>
+        <div class="header-stats">
+          <span id="schoolCount">—</span>
+          <small>skoler</small>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main-layout">
+
+    <!-- Map -->
+    <div class="map-wrap">
+      <div id="map"></div>
+
+      <!-- Filter bar (floating on map) -->
+      <div class="filter-bar" id="filterBar">
+        <!-- School type toggle -->
+        <div class="filter-group">
+          <label class="filter-bar-label">Skoletype</label>
+          <div class="type-toggle">
+            <button class="type-btn active" data-type="alle">Alle</button>
+            <button class="type-btn" data-type="Folkeskole">Folkeskole</button>
+            <button class="type-btn" data-type="Friskole">Privatskole</button>
+          </div>
+        </div>
+
+        <div class="filter-bar-divider"></div>
+
+        <!-- Leverandør dropdown -->
+        <div class="filter-group">
+          <label class="filter-bar-label" for="levSelect">Leverandør</label>
+          <div class="select-wrap">
+            <select id="levSelect">
+              <option value="">Alle leverandører</option>
+            </select>
+            <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+
+        <button class="filter-reset-btn" id="resetFilters" title="Nulstil filter">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Visible count badge -->
+      <div class="map-badge" id="visibleBadge">— skoler vist</div>
+    </div>
+
+    <!-- School detail panel -->
+    <aside class="detail-panel" id="detailPanel" aria-label="Skoleoplysninger">
+      <button class="detail-close" id="closePanel" aria-label="Luk">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <div id="detailContent"></div>
+    </aside>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" crossorigin=""></script>
+  <script src="skolemad-platform/public/data/schools.js"></script>
+  <script src="skolemad-platform/public/js/app.js"></script>
+</body>
+</html>
